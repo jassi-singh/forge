@@ -11,7 +11,12 @@ A lightweight, high-performance, and scalable Key Generation Service (KGS) writt
 *   Collision-Free by Design: Guarantees unique keys across all instances by using a transactional database mechanism to reserve blocks of numbers for key generation.
     
 *   Concurrent-Safe: Built to handle thousands of simultaneous requests safely using a channel-based key pool and atomic database operations.
-    
+
+## Demo
+
+https://github.com/user-attachments/assets/cef15d64-65b8-4530-aa9f-337767c5d5d9
+
+
 
 ## ⚙️ How It Works
 
