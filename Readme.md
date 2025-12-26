@@ -1,4 +1,4 @@
-# mini-forge
+# forge
 
 A lightweight, high-performance, and scalable Key Generation Service (KGS) written in Go. Designed for distributed systems that require a steady stream of short, unique, and collision-free keys.
 
@@ -17,7 +17,7 @@ A lightweight, high-performance, and scalable Key Generation Service (KGS) writt
 
 The service is designed to avoid the typical bottlenecks of a traditional KGS. Instead of hitting the database for every key request, it generates keys in batches and serves them from memory.
 
-1.  Range Reservation: When a mini-forge instance needs new keys, it requests a unique range of numbers from the database. It does this in a transaction using a `SELECT ... FOR UPDATE` lock to ensure no two instances can get the same range. The size of this range is configurable via the RANGE\_SIZE setting.
+1.  Range Reservation: When a forge instance needs new keys, it requests a unique range of numbers from the database. It does this in a transaction using a `SELECT ... FOR UPDATE` lock to ensure no two instances can get the same range. The size of this range is configurable via the RANGE\_SIZE setting.
     
 2.  Key Generation: The service then generates keys for every number in its reserved range using a Base62 encoding strategy. This creates short, URL-friendly strings.
     
@@ -42,9 +42,9 @@ flowchart TD
   end
   subgraph subGraph1["Your Service"]
     B("Load Balancer")
-    C1("mini-forge Instance 1")
-    C2("mini-forge Instance 2")
-    C3("mini-forge Instance N")
+    C1("forge Instance 1")
+    C2("forge Instance 2")
+    C3("forge Instance N")
   end
   subgraph subGraph2["Shared Resources"]
     D["Central Database SQLite"]
@@ -119,8 +119,8 @@ The service is configured using a config.yml file, with values populated by envi
 
 1.  Clone the repository:  
     ```bash
-    git clone https://github.com/jassi-singh/mini-forge.git
-    cd mini-forge  
+    git clone https://github.com/jassi-singh/forge.git
+    cd forge  
     ```
       
     
@@ -135,8 +135,8 @@ The service is configured using a config.yml file, with values populated by envi
     go run main.go  
       
     #Or build a binary and run it:  
-    go build -o mini-forge  
-    ./mini-forge  
+    go build -o forge  
+    ./forge  
     ```
     
 
@@ -240,7 +240,7 @@ For other platforms, visit: https://k6.io/docs/get-started/installation/
 
 ### Running Multiple Service Instances
 
-To properly test the distributed nature of mini-forge, you should run multiple instances simultaneously:
+To properly test the distributed nature of forge, you should run multiple instances simultaneously:
 
 **Terminal 1:**
 ```bash
